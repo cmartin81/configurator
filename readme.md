@@ -1,6 +1,18 @@
-# configurator [![Build Status](https://travis-ci.org/cmartin81/configurator.svg?branch=master)](https://travis-ci.org/cmartin81/configurator)
+# Configurator
 
-> My epic module
+Configuration tool for loading json that contains environment variables.
+Prefix your environment variables with $<environemnt>_key.  
+```
+var config = {
+  apiEndpoint : 'https://test.com',
+  $prod_apiEndpoint' : 'https://prod.com'
+  $local_apiEndpoint' : 'http://localhost:8080'
+};
+
+require('configurator')(configJson, 'prod').apiEndpoint; // https://prod.com
+require('configurator')(configJson, 'local').apiEndpoint; // http://localhost:8080
+require('configurator')(configJson, 'foobar').apiEndpoint; // https://test.com
+```
 
 
 ## Install
@@ -13,33 +25,27 @@ $ npm install --save configurator
 ## Usage
 
 ```js
-var configurator = require('configurator');
+var configJson = {
+  foo: 'bar',
+  foobar: 'foobar',
+  $prod_foo: 'foo in prod',
+  $test_foo: 'foo in test',
+  deep:{
+    veryDeep: {
+      publicKey: 'abc',
+      secret: 'secret',
+      $prod_secret: 'super secret'
+    }
+  }
+};
 
-configurator('unicorns');
-//=> 'unicorns & rainbows'
+var config = require('configurator')(configJson, 'prod');
+
+console.log(config.deep.veryDeep.secret) 
+// super secret
+
 ```
-
-
-## API
-
-### configurator(input, [options])
-
-#### input
-
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-##### foo
-
-Type: `boolean`  
-Default: `false`
-
-Lorem ipsum.
-
 
 ## License
 
-MIT © [Christian Martin](https://github.com/cmartin81)
+MIT © [cmartin81](https://github.com/cmartin81)
