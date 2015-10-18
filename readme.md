@@ -1,4 +1,4 @@
-# Configurator
+# json-configurator
 
 Configuration tool for loading json that contains environment variables.
 Prefix your environment variables with $<environemnt>_key.  
@@ -9,16 +9,16 @@ var config = {
   $local_apiEndpoint' : 'http://localhost:8080'
 };
 
-require('configurator')(configJson, 'prod').apiEndpoint; // https://prod.com
-require('configurator')(configJson, 'local').apiEndpoint; // http://localhost:8080
-require('configurator')(configJson, 'foobar').apiEndpoint; // https://test.com
+require('json-configurator')(configJson, 'prod').apiEndpoint; // https://prod.com
+require('json-configurator')(configJson, 'local').apiEndpoint; // http://localhost:8080
+require('json-configurator')(configJson, 'foobar').apiEndpoint; // https://test.com
 ```
 
 
 ## Install
 
 ```
-$ npm install --save configurator
+$ npm install --save json-configurator
 ```
 
 
@@ -39,7 +39,7 @@ var configJson = {
   }
 };
 
-var config = require('configurator')(configJson, 'prod');
+var config = require('json-configurator')(configJson, 'prod');
 
 console.log(config.deep.veryDeep.secret) 
 // super secret
