@@ -1,7 +1,7 @@
 # json-configurator
 
 Configuration tool for loading json that contains environment variables.
-Prefix your environment variables with $<environemnt>_key.  
+Prefix your environment variables with *$ and postfix it with *_  (se example)
 ```
 var config = {
   apiEndpoint : 'https://test.com',
