@@ -1,6 +1,7 @@
 # json-configurator
 
-Configuration tool for loading json that contains environment variables.
+Configuration tool for loading json that contains environment variables. 
+It supports variables which is deeply nested!!
 Prefix your environment variables with *$* and postfix it with *_*  (se example)
 ```
 var config = {
