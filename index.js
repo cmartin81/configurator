@@ -17,4 +17,26 @@ function processSection(variables, stage) {
 	return result;
 }
 
-module.exports = processSection;
+function bindReferences(orgJson, variables) {
+	var result = {};
+	_.forEach(variables, function (val, key) {
+		if (typeof val === 'object') {
+			var innerSection = bindReferences(orgJson, val);
+			result[key] = innerSection;
+		} else if (regForStaging.exec(key) === null && result[key] === undefined) {
+			result[key] = _.template(val)(orgJson);
+		}
+	});
+	return result;
+}
+
+var compiled = _.template('<b><%- value %></b>');
+compiled({ 'value': '<script>' });
+
+function process(variables, stage){
+	var json = processSection(variables, stage);
+	var result = bindReferences(json, json);
+	return result;
+}
+
+module.exports = process;
