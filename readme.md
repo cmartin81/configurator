@@ -13,12 +13,14 @@ var config = {
   userEndpoint: '<%= apiEndpoint %>/users'
 };
 
-require('json-configurator')(configJson, 'prod').apiEndpoint; // https://prod.com
-require('json-configurator')(configJson, 'prod').userEndpoint; // https://prod.com/users
-require('json-configurator')(configJson, 'local').apiEndpoint; // http://localhost:8080
-require('json-configurator')(configJson, 'local').userEndpoint; // http://localhost:8080/users
-require('json-configurator')(configJson, 'foobar').apiEndpoint; // https://test.com
-require('json-configurator')(configJson, 'foobar').userEndpoint; // https://test.com/users
+require('json-configurator')(configJson, 'prod').userEndpoint; 
+// https://prod.com/users
+
+require('json-configurator')(configJson, 'local').userEndpoint; 
+// http://localhost:8080/users
+
+require('json-configurator')(configJson, 'foobar').userEndpoint; 
+//https://test.com/users
 ```
 
 

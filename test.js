@@ -9,7 +9,7 @@ var configSetup = {
 		'users': '<%= baseUrl %>/users',
 		'accounts': '<%= baseUrl %>/accounts'
 	},
-	'interpolation': '<%= foo %>bar',
+	'interpolation': '<%= nested.hello %>bar',
 	'$prod_foo': 'prod foo',
 	'$test_foo': 'test foo',
 	'nested': {
@@ -29,7 +29,7 @@ it('should filter out unnecessarily varibles ', function () {
 	assert.strictEqual(config.nested.onlyInProduction, 'Only in prod' );
 	assert.strictEqual(config.nested.deep.abc, 'foobar' );
 	assert.strictEqual(config['$test_foo'], undefined );
-	assert.strictEqual(config.interpolation, 'prod foobar' );
+	assert.strictEqual(config.interpolation, 'hibar' );
 	assert.strictEqual(config.endpoints.users, 'https://prod.com/users' );
 
 
