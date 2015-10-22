@@ -1,6 +1,6 @@
 {
   "name": "json-configurator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Small module for handling environment variables",
   "license": "MIT",
   "repository": "cmartin81/configurator",
