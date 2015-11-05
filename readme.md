@@ -3,6 +3,8 @@
 Configuration tool for loading json that contains environment variables and self references. 
 It also supports variables which is deeply nested!!
 Prefix your environment variables with *$* and postfix it with *_* (se example). To reference to another variable inside the same json prefix it with <%= and postfix it with %>
+
+
 Se examples:
 
 ```

@@ -27,7 +27,9 @@
     "environment variable",
     "json"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
   "devDependencies": {
     "mocha": "^2.2.5"
   }
