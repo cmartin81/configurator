@@ -24,14 +24,15 @@ function bindReferences(orgJson, variables) {
 			var innerSection = bindReferences(orgJson, val);
 			result[key] = innerSection;
 		} else if (regForStaging.exec(key) === null && result[key] === undefined) {
-			result[key] = _.template(val)(orgJson);
+			if (typeof val === 'string'){
+				result[key] = _.template(val)(orgJson);
+			} else {
+				result[key] = val;
+			}
 		}
 	});
 	return result;
 }
-
-var compiled = _.template('<b><%- value %></b>');
-compiled({ 'value': '<script>' });
 
 function process(variables, stage){
 	var json = processSection(variables, stage);

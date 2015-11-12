@@ -5,6 +5,7 @@ var configurator = require('./');
 var configSetup = {
 	'baseUrl': 'http://test.com',
 	'$prod_baseUrl': 'https://prod.com',
+	'number': 123,
 	'endpoints': {
 		'users': '<%= baseUrl %>/users',
 		'accounts': '<%= baseUrl %>/accounts'
@@ -36,6 +37,7 @@ it('should filter out unnecessarily varibles ', function () {
 	var configTest = configurator(configSetup, 'test');
 	assert.strictEqual(configTest.nested.onlyInProduction,undefined );
 	assert.strictEqual(configTest.endpoints.users, 'http://test.com/users' );
+	assert.strictEqual(configTest.number, 123 );
 
 
 });
