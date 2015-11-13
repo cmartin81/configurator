@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/cmartin81/configurator.svg)](https://travis-ci.org/cmartin81/configurator)
 # json-configurator
 
 Configuration tool for loading json that contains environment variables and self references. 
