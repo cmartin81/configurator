@@ -5,10 +5,16 @@ var configurator = require('./');
 var configSetup = {
 	'baseUrl': 'http://test.com',
 	'$prod_baseUrl': 'https://prod.com',
-	'number': 123,
+	'number': 2 * 4,
 	'endpoints': {
 		'users': '<%= baseUrl %>/users',
 		'accounts': '<%= baseUrl %>/accounts'
+	},
+	$prod_areaCodes: {
+		"area1": "abcd"
+	},
+	$test_areaCodes: {
+		"area1": "test_abcd"
 	},
 	'interpolation': '<%= nested.hello %>bar',
 	'$prod_foo': 'prod foo',
@@ -32,12 +38,14 @@ it('should filter out unnecessarily varibles ', function () {
 	assert.strictEqual(config['$test_foo'], undefined );
 	assert.strictEqual(config.interpolation, 'hibar' );
 	assert.strictEqual(config.endpoints.users, 'https://prod.com/users' );
+	assert.strictEqual(config.areaCodes.area1, 'abcd' );
 
 
 	var configTest = configurator(configSetup, 'test');
 	assert.strictEqual(configTest.nested.onlyInProduction,undefined );
 	assert.strictEqual(configTest.endpoints.users, 'http://test.com/users' );
-	assert.strictEqual(configTest.number, 123 );
+	assert.strictEqual(configTest.number, 8 );
+	assert.strictEqual(configTest.areaCodes.area1, 'test_abcd' );
 
 
 });

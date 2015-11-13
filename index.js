@@ -1,17 +1,20 @@
 var _ = require('lodash');
 var regForStaging = /^\$\w*?_/;
 
+function isStagingVariable(key, stage) {
+	return key.indexOf('$' + stage + '_') === 0;
+}
+
 function processSection(variables, stage) {
 	var result = {};
 	_.forEach(variables, function (val, key) {
-		if (typeof val === 'object') {
-			var innerSection = processSection(val, stage);
-			result[key] = innerSection;
-		} else if (key.indexOf('$' + stage + '_') === 0) {
+		if (isStagingVariable(key, stage)) {
 			var newKey = key.substring(stage.length + 2);
-			result[newKey] = val;
+			var innerSection = typeof val === 'object' ? processSection(val, stage): val;
+			result[newKey] = innerSection;
 		} else if (regForStaging.exec(key) === null && result[key] === undefined) {
-			result[key] = val;
+			var innerSection = typeof val === 'object' ? processSection(val, stage): val;
+			result[key] = innerSection;
 		}
 	});
 	return result;
@@ -36,8 +39,12 @@ function bindReferences(orgJson, variables) {
 
 function process(variables, stage){
 	var json = processSection(variables, stage);
+
 	var result = bindReferences(json, json);
 	return result;
 }
 
+
 module.exports = process;
+
+
