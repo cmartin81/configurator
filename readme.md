@@ -16,7 +16,7 @@ var config = {
   userEndpoint: '<%= apiEndpoint %>/users'
 };
 
-require('json-configurator')(configJson, 'prod').userEndpoint; 
+require('json-configurator')(configJson, process.env.STAGE ).userEndpoint;  // let say that STAGE === 'prod' 
 // https://prod.com/users
 
 require('json-configurator')(configJson, 'local').userEndpoint; 
@@ -24,6 +24,10 @@ require('json-configurator')(configJson, 'local').userEndpoint;
 
 require('json-configurator')(configJson, 'foobar').userEndpoint; 
 //https://test.com/users
+
+require('json-configurator')(configJson).userEndpoint; 
+//https://test.com/users
+
 ```
 
 
