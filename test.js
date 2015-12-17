@@ -22,6 +22,7 @@ var configSetup = {
 	'$prod_foo': 'prod foo',
 	'$test_foo': 'test foo',
 	'nested': {
+		'webpages': ["abc", "DEF"],
 		'hello': 'hi',
 		'$prod_onlyInProduction': 'Only in prod',
 		'deep': {
@@ -33,7 +34,6 @@ var configSetup = {
 
 it('should filter out unnecessarily varibles ', function () {
 	var config = configurator(configSetup, 'prod');
-
 	assert.strictEqual(config.foo, 'prod foo' );
 	assert.strictEqual(config.nested.onlyInProduction, 'Only in prod' );
 	assert.strictEqual(config.nested.deep.abc, 'foobar' );
@@ -42,6 +42,8 @@ it('should filter out unnecessarily varibles ', function () {
 	assert.strictEqual(config.endpoints.users, 'https://prod.com/users' );
 	assert.strictEqual(config.areaCodes.area1, 'abcd' );
 	assert.deepEqual(config.array, ["prod",1,2] );
+	assert.deepEqual(config.nested.webpages, ["abc", "DEF"] );
+
 
 	var configTest = configurator(configSetup, 'test');
 	assert.strictEqual(configTest.nested.onlyInProduction,undefined );

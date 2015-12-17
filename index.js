@@ -31,7 +31,7 @@ function processSection(variables, stage) {
 function bindReferences(orgJson, variables) {
 	var result = {};
 	_.forEach(variables, function (val, key) {
-		if (typeof val === 'object') {
+		if (_.isPlainObject(val)) {
 			var innerSection = bindReferences(orgJson, val);
 			result[key] = innerSection;
 		} else if (regForStaging.exec(key) === null && result[key] === undefined) {
