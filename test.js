@@ -10,6 +10,8 @@ var configSetup = {
 		'users': '<%= baseUrl %>/users',
 		'accounts': '<%= baseUrl %>/accounts'
 	},
+	$prod_array: ["prod",1,2],
+	array: ["default",11,12],
 	$prod_areaCodes: {
 		"area1": "abcd"
 	},
@@ -24,7 +26,7 @@ var configSetup = {
 		'$prod_onlyInProduction': 'Only in prod',
 		'deep': {
 			'abc': 'foobar',
-			'$test_abc': 'foobar for test',
+			'$test_abc': 'foobar for test'
 		}
 	}
 };
@@ -39,13 +41,14 @@ it('should filter out unnecessarily varibles ', function () {
 	assert.strictEqual(config.interpolation, 'hibar' );
 	assert.strictEqual(config.endpoints.users, 'https://prod.com/users' );
 	assert.strictEqual(config.areaCodes.area1, 'abcd' );
-
+	assert.deepEqual(config.array, ["prod",1,2] );
 
 	var configTest = configurator(configSetup, 'test');
 	assert.strictEqual(configTest.nested.onlyInProduction,undefined );
 	assert.strictEqual(configTest.endpoints.users, 'http://test.com/users' );
 	assert.strictEqual(configTest.number, 8 );
 	assert.strictEqual(configTest.areaCodes.area1, 'test_abcd' );
+	assert.deepEqual(configTest.array, ["default",11,12] );
 
 
 });
