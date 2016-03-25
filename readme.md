@@ -5,6 +5,7 @@ Configuration tool for loading json that contains environment variables and self
 It also supports variables which is deeply nested!!
 Prefix your environment variables with *$* and postfix it with *_* (se example). To reference to another variable inside the same json prefix it with <%= and postfix it with %>
 
+I´ve added a CLI utility for this package.
 
 Se examples:
 
@@ -70,6 +71,28 @@ console.log(config.endpoints.users)
 // https://prod.com/users
 
 ```
+
+## install CLI
+
+```
+$ npm install -g json-configurator
+```
+
+## Usage CLI
+
+
+First create a json file:
+
+	$ echo '{"a":111, "$prod_a":999}' > test.json
+
+	# with pipe	
+	$ cat test.json | json-configurator  // => {a:111}
+	$ cat test.json | json-configurator -e prod  // => { a: 999 }
+
+	# with argument
+	$ json-configurator  test.json // => {a:111}
+	$ json-configurator -e prod  test.json // => { a: 999 }
+
 
 ## License
 

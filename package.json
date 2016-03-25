@@ -12,6 +12,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "bin": {
+    "json-configurator": "./bin/json-configurator.js"
+  },
   "scripts": {
     "test": "mocha"
   },
@@ -28,6 +31,7 @@
     "json"
   ],
   "dependencies": {
+    "commander": "^2.9.0",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
