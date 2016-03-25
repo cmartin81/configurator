@@ -10,7 +10,7 @@ if (_.isEmpty(argv._ )) {
 	process.stdin.on('readable', function (){
 		const chunk = process.stdin.read();
 		if (chunk !== null) {
-			console.log(parseResult(chunk, argv.e));
+			console.log(JSON.stringify(parseResult(chunk, argv.e)));
 			process.exit(0);
 		}
 		console.log('Usage: json-configurator -e [environment] <file>');
@@ -19,7 +19,7 @@ if (_.isEmpty(argv._ )) {
 	});
 } else {
 	const file = fs.readFileSync(argv._[0]).toString();
-	console.log(parseResult(file, argv.e));
+	console.log(JSON.stringify(parseResult(file, argv.e)));
 }
 
 function parseResult(text, env) {
